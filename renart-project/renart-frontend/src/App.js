@@ -19,7 +19,7 @@ function App() {
     popularityMax: ""
   });
 
-  // Ürünleri getiren fonksiyon (filtrelere göre)
+
   const fetchProducts = async () => {
     const queryParams = new URLSearchParams();
 
@@ -28,13 +28,14 @@ function App() {
     if (filters.popularityMin) queryParams.append("popularityMin", filters.popularityMin);
     if (filters.popularityMax) queryParams.append("popularityMax", filters.popularityMax);
 
-    const response = await fetch(`http://localhost:3001/api/products?${queryParams.toString()}`);
+   const BASE_URL = "https://renart-case-study-fa0w.onrender.com";
+  const response = await fetch(`${BASE_URL}/api/products?${queryParams.toString()}`);
     const data = await response.json();
     setProducts(data.map(p => ({ ...p, selectedColor: "yellow" })));
   };
 
   useEffect(() => {
-    fetchProducts(); // sayfa ilk açıldığında çağır
+    fetchProducts(); 
   }, []);
 
   const handleColorChange = (index, color) => {
@@ -61,7 +62,7 @@ function App() {
     <div style={{ padding: "2rem 4rem" }}>
       <h2 style={{ textAlign: "center" }}>Product List</h2>
 
-      {/* FİLTRE BAR */}
+      {}
       <div className="filter-bar">
         <input
           type="number"
@@ -92,7 +93,7 @@ function App() {
         <button onClick={fetchProducts}>Filtrele</button>
       </div>
 
-      {/* ÜRÜNLER */}
+      {}
       <Slider {...settings}>
         {products.map((product, index) => (
           <div key={index} style={{ padding: "0 0.5rem" }}>
